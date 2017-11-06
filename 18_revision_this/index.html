@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Révisions this</title>
+    <script src="app.js"></script>
+    <script src="trace.js"></script>
+    <script src="../utility/utility.js"></script>
+</head>
+<body>
+    <h1>Révision this</h1>
+    <p>
+        This est un mot clé déroutant en JS.<br>
+        Il fait référence à différentes valeurs en fonction du contexte dans lequel il est appelé.<br>
+        This, c'est "ça", "cette chose", "ce dont on parle "ici et maintenant";
+    </p>
+    <hr>
+    <button id="btn1" onclick="app.observer('global')">
+        this global
+    </button>
+    <button onclick="app.observer('undef')">
+        this undefined
+    </button>
+    <button onclick="app.observer(this)">
+        this evt handler
+    </button>
+    <button onclick="app.observer('constr')">
+        this constructeur
+    </button>
+</body>
+</html>

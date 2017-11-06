@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>node + mysql</title>
+    <script src="app.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1 class="title">node (express) + mysql</h1>
+    <p>
+        Récupérer la doc du <a href="https://github.com/mysqljs/mysql" target="_blank">driver mysql pour node</a>
+    </p>
+    <hr>
+    <button id="get_data" class="btn">get data from db</button>
+    <table id="tabler">
+        <thead>
+            <tr>
+                <th class="id">id</th>
+                <th class="mail">mail</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="intro">
+                <td colspan="2">
+                    pas de valeurs pour le moment...
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <hr>
+    <div class="f-row">
+        <input type="text" id="user_input" value="toi@tonprovider.com">
+        <button id="post_data" class="btn">post data to db</button>
+    </div>
+    <hr>
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Vue JS - Section 2 Exo 4 - soluce</title>
+    <link rel="stylesheet" href="../00-styles/styles.css">
+    <style>
+        #add_some {
+            font-size: 12px;
+            text-align: center;
+            padding: 3px;
+            box-sizing: border-box;
+        }
+
+        .block {
+            transition: all 1s linear;
+            box-sizing: border-box;
+            margin: 20px 0;
+            height: 100px;
+            width: 100px;
+            border: 2px solid;
+        }
+
+        .is-highlighted {
+            border: 2px solid yellow !important;
+        }
+
+        .is-shrinked {
+            height: 50px !important;
+            width: 50px !important;
+        }
+
+        .green {
+            background: forestgreen;
+            color: white;
+        }
+
+        .orange {
+            background: orange;
+            color: white;
+        }
+
+        .blue {
+            background: dodgerblue;
+            color: white;
+        }
+
+        .invisible {
+            display: none;
+        }
+
+        .has-border {
+            border: 2px solid #d3d4b0;
+        }
+
+        .progress {
+            height: 16px;
+            border: 1px solid;
+            max-width: 320px;
+            margin-top: 20px;
+            padding: 0;
+        }
+
+        .bar {
+            background: green;
+            height: 100%;
+        }
+    </style>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        window.onload = function start() {
+            new Vue({
+                el: "#exercice-4",
+                data: {
+                    activeClass: "",
+                    activeClassInput: "",
+                    progress: 0,
+                    visible: true,
+                    myStyle: {
+                        height: "200px",
+                        width: "200px",
+                        backgroundColor: "gray"
+                    }
+                },
+                computed: {},
+                methods: {
+                    onProgressStart: function() {
+                        this.progress = 0;
+                        let i = setInterval(function() {
+                            this.progress += 1;
+                            if (this.progress >= 100) {
+                                clearInterval(i);
+                            }
+                        }.bind(this), 10);
+                    },
+
+                    startFX: function() {
+                        this.activeClass = "is-highlighted";
+                        setInterval(function() {
+                            this.activeClass = this.activeClass === "is-highlighted" ? "is-shrinked" : "is-highlighted";
+                        }.bind(this), 3000);
+                    }
+                }
+            })
+        };
+    </script>
+</head>
+
+<body>
+    <div class="app" id="exercice-4">
+        <!--  1/ démarrer l'effet CSS au click. Alterner entre les classes
+        .higlight et .shrink sur #effect à chaque tick d'un interval() -->
+        <div>
+            <button @click="startFX">start FX</button>
+            <div id="effect" class="block" :class="activeClass"></div>
+        </div>
+        <!--  2/ utiliser la syntaxe array pour associer des classes à la <div> suivante -->
+        <div>
+            <div id="add_some" :class="['blue', 'has-border', {'is-shrinked': startFX}]">
+                <span>add some classes : )</span>
+            </div>
+        </div>
+        <!--  3/ ajouter la classe saisie dans l'<input> suivant à la <div> suivante -->
+        <div>
+            <div :class="['block', activeClassInput]"></div>
+
+            <input type="text" v-model="activeClassInput" placeholder="choose a class =>">
+
+            <input type="submit" value="reset"
+            @click="activeClassInput = '' ">
+            <ul>
+                <li>is-highlighted</li>
+                <li>is-shrinked</li>
+                <li>green</li>
+                <li>orange</li>
+                <li>blue</li>
+                <li>has-border</li>
+            </ul>
+        </div>
+        <!--  4/ l'utilisateur peut saisir un nom de classe
+        et une valeur booleene pour afficher/masquer cette classe -->
+        <div>
+            <div :class="[{block: true}, {invisible: !visible}, activeClassInput]"></div>
+            <input type="text" placeholder="saisir un nom de classe"
+            v-model="activeClassInput" >
+
+            <label for="display">afficher</label>
+            <input id="display" type="radio" :checked="visible" @change="visible = !visible">
+
+            <label for="hide">masquer</label>
+            <input id="hide" type="radio" :checked="!visible" @change="visible = !visible">
+        </div>
+        <!--  5/ reprendre le point 3/ et implanter la même solution avec l'attribut :style -->
+        <div>
+            <div :style="myStyle" class="block"></div>
+            <input type="text" v-model="myStyle.backgroundColor">
+        </div>
+        <!--  6/ créer une progress-bar animée (simple). l'animation se déclenche au click sur le <button> suivant -->
+        <div>
+            <button @click="onProgressStart">start progress</button>
+            <div class="progress">
+                <div class="bar" :style="{width: progress + '%'}"></div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

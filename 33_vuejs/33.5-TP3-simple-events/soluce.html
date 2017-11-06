@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Vue JS - Section 2 Exo 2 - soluce</title>
+    <style>
+        body {
+            font-family: arial;
+        }
+
+        .app>div,
+        .app>p {
+            border-bottom: 1px solid dodgerblue;
+            margin: 10px 0;
+            padding: 10px 20px;
+        }
+        .product-detail {
+            background: dodgerblue;
+            color: white;
+            width: 320px;
+            border-radius: .3rem;
+        }
+        .fade-enter-active, .fade-leave-active {
+          transition: opacity 1s;
+        }
+        .fade-enter, .fade-leave-to {
+          opacity: 0
+        }
+    </style>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        window.onload = function start() {
+            new Vue({
+                el: "#exercice-2",
+                data: {
+                    myValue: "no value entered yet...",
+                    todos: [],
+                    productIsVisible: false,
+                    titleTshirt: "T-shirt Obey",
+                    descTshirt: "un super t-shirt en coton qui coûte une blinde",
+                    priceTshirt: 40
+                },
+                methods: {
+                    showAlert: function() {
+                        return alert("yata !");
+                    },
+                    onInputChange: function(e) {
+                        this.myValue = e.target.value;
+                    },
+                    onAddTodo: function(e) {
+                        if (e.target.value) {
+                            this.todos.push(e.target.value);
+                            e.target.value = "";
+                        }
+                    }
+                }
+            })
+        };
+    </script>
+</head>
+<body>
+    <div id="exercice-2">
+        <!--  1 afficher une alerte au click sur ce bouton -->
+        <div>
+            <button v-on:click="showAlert">show alert</button>
+            <!--  @ag: ci-dessous: bug sur certains clients et pas d'autres... affaire à suivre ... -->
+            <!-- <button @click="window.alert('in')">show alert</button> -->
+        </div>
+        <!--  2 écouter les events "keyup" et stocker la valeur dans la prop myValue de this.data -->
+        <hr>
+        <div>
+            <input type="text" v-on:keyup="onInputChange">
+            <span style="display: block">{{ myValue }}</span>
+        </div>
+        <!--  3 implanter l'exo 2 de façon a ce que l'event ne soit déclenché que si la touche enter est pressée -->
+        <hr>
+        <div>
+            <input type="text" @keyup.enter="onInputChange">
+        </div>
+        <!--  4/ Créer un bouton toggle.
+        a - Au click, le produit masqué au départ apparaît.
+        b - Appliquer une transition CSS sur le détail produit.
+        c - changer le texte du bouton en "masquer détails"
+        -->
+        <hr>
+        <div>
+            <button class="btn"
+            @click="productIsVisible = !productIsVisible">
+                <span v-if="productIsVisible">voir détails</span>
+                <span v-else>masquer détails</span>
+            </button>
+            <transition name="fade">
+                <p v-if="!productIsVisible">
+                    Les détails de ce produit sont masquées...
+                </p>
+            </transition>
+            <transition name="fade">
+                <div class="product-detail"
+                    v-if="productIsVisible">
+                    <h2>{{ titleTshirt }}</h2>
+                    <p> {{ descTshirt }} </p>
+                    <p> prix: {{ priceTshirt }} </p>
+                </div>
+            </transition>
+        </div>
+        <!--  5 Au click sur enter dans cet input<>, ajouter sa value dans un tableau todos[]. Ne pas ajouter de valeurs vides (empty String). Boucler sur le tableau pour afficher tous les éléments dans une liste non ordonnée. Si todos[] est vide, afficher un message dans le p<> -->
+        <hr>
+        <div>
+            <input type="text" @keyup.enter="onAddTodo" placeholder="ajouter todo">
+            <p v-if="!todos.length">pas de todos pour le moment</p>
+            <ul class="toto-list">
+                <li v-for="todo in todos">{{ todo }}</li>
+            </ul>
+        </div>
+    </div>
+</body>
+
+</html>

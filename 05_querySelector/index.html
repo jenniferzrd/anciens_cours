@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="utility.js"></script>
+    <script>
+        var app = (function app() {
+            "use strict";
+            var titre, elements, gererClicks, compterSquareActifs;
+
+            window.onload = function start() {
+                var i;
+                titre = document.getElementById("title_main");
+                elements = document.querySelectorAll(".text, .square");
+                //console.log(typeof elements);
+
+                for (i = 0; i < elements.length; i += 1) {
+                    // console.log(elements[i]);
+                    // console.log(elements[i].textContent);
+                    // console.log(elements[i].nextElementSibling);
+                    elements[i].onclick = gererClicks;
+                }
+            };
+
+            gererClicks = function gererClicks() {
+                // log(this); // this ici représente la source du click
+                if (this.classList.contains("square")) {
+                    this.classList.toggle("is-active");
+                    compterSquareActifs();
+                }
+            };
+
+            compterSquareActifs = function compterSquareActifs() {
+                var span, actifs, countActifs;
+                span = byId("nb_clicks");
+                actifs = selectAll(".squares .square.is-active");
+                countActifs = actifs.length;
+                span.innerHTML = countActifs;
+
+                // OU !!!
+                byId("nb_clicks").innerHTML = selectAll(".squares .square.is-active").length;
+
+            };
+        }());
+    </script>
+    <style>
+        body {
+            font-family: arial;
+        }
+
+        .squares {
+            display: flex;
+            flex-wrap: wrap;
+            max-width: 218px;
+        }
+
+        .text {
+            cursor: pointer;
+        }
+
+        .text.is-active {
+            color: firebrick;
+        }
+
+        .squares .square {
+            border: 2px solid silver;
+            width: 100px;
+            height: 100px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            box-sizing: border-box;
+        }
+
+        .squares .square:hover,
+        .squares .square.is-active {
+            background: firebrick;
+        }
+
+
+
+        .squares .square:nth-child(even) {
+            margin-right: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 id="title_main" class="title">hello :
+        <span id="nb_clicks" class="text is-active">0</span>
+        <span>&nbsp;squares actifs...</span>
+    </h1>
+    <p class="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe officiis voluptate animi commodi harum expedita cumque quo accusamus perferendis quaerat voluptates, ullam numquam perspiciatis distinctio officia! Voluptatem dolore laborum nemo.</p>
+    <input type="text" id="saisie" class="input">
+    <ul class="list">
+        <li class="item">a</li>
+        <li class="item">b</li>
+        <li class="item">c</li>
+    </ul>
+    <p class="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe officiis voluptate animi commodi harum expedita cumque quo accusamus perferendis quaerat voluptates, ullam numquam perspiciatis distinctio officia! Voluptatem dolore laborum nemo.</p>
+    </ul>
+    <!-- div.squares>div.square*6 -->
+    <div class="squares">
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <h1 class="title">
+                Welcome to {{ title }} !!!
+            </h1>
+            <input type="text" [(ngModel)]="dataInput">
+            <p>
+                {{ dataInput }}
+            </p>
+            <app-message-success></app-message-success>
+            <app-message-warning></app-message-warning>
+        </div>
+    </div>
+    <div class="row">
+        <!-- @ag:  On peut utiliser différents selecteur : balise, attribut ou classCSS ... au choix selon le cas de figure rencontré (voir servers.component.ts - selector )-->
+        <app-servers class="col-xs-12"></app-servers>
+        <!-- <div app-servers class="col-xs-12"></div>
+        <section class=" app-servers col-xs-12"></section> -->
+    </div>
+</div>

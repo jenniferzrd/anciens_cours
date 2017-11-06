@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue JS - Section 1.1 Exo 1 - consigne</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        window.onload = function start() {
+
+            new Vue({
+                el: "#exercice-1",
+                data: {
+                    title: "Vue JS TP 2",
+                    user: {nom: "Guillaume", age: 37},
+                    img: {
+                        url:  "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Fractal_Broccoli.jpg/220px-Fractal_Broccoli.jpg",
+                         alt: "une jolie fractale"
+                    }
+                },
+                methods: {
+                    getRandom: function() {
+                        return Math.floor(Math.random() * 100) / 100;
+                    }
+                }
+            });
+        };
+    </script>
+</head>
+<body>
+    <div id="exercice-1">
+        <!-- 0/ Afficher le titre "Vue JS TP 2" -->
+        <h1>{{ title }}</h1>
+        <!-- 1/ remplir le <p> suivant avec vos nom ET âge en utilisant l'interpolation de chaîne -->
+        <p>
+            l'user se nomme {{user.nom}}<br>
+            et est âgé de {{user.age}} ans
+        </p>
+        <!--  2/ afficher votre âge multiplié par 3 -->
+        <p>
+            si l'user était trois fois plus vieux, <br>
+            il aurait : {{user.age * 3}}
+        </p>
+        <!--  3/ appeler une fonction pour afficher un nombre compris entre 0 et 1 -->
+        <p> {{ getRandom() }}</p>
+        <!--  4/ afficher une image de votre choix en utilisant un bind sur l'attribut "src" -->
+        <img :src="img.url" alt="img.alt" style="display: block">
+        <!--  5/ remplir l'input suivant avec votre nom en bindant sur l'attribut "value" -->
+        <input type="text" :value="user.nom">
+    </div>
+</body>
+
+</html>

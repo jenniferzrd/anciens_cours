@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>calculatrice simple</title>
+    <script src="utility.js"></script>
+    <script>
+        var calculetteSimple = function calculetteSimple() {
+            "use strict";
+            var dom, add, sub, mult, div, checkValues, displayResult, checkOperator;
+
+            dom = {};
+            dom.op1 = byId("oper1");
+            dom.op2 = byId("oper2");
+            dom.operators = byId("operators");
+            dom.submit = byId("submit");
+            dom.display = byId("display");
+
+            add = function add(a, b) {
+                return a + b;
+            };
+
+            sub = function sub(a, b) {
+                return a - b;
+            };
+
+            mult = function mult(a, b) {
+                return a * b;
+            };
+
+            div = function div(a, b) {
+                res = a / b;
+                return isFinite(res) ? res : false;
+            };
+
+            checkOperator = function checkOperator() {
+                var selectedIndex = dom.operators.selectedIndex;
+                return dom.operators.children[selectedIndex].value;
+            };
+
+            checkValues = function checkValues(a, b) {
+                var res = false;
+                if (a && b && isFinite(a) && isFinite(b)) {
+                    res = {
+                        op1: Number(a),
+                        op2: Number(b)
+                    };
+                }
+                return res;
+            };
+
+            dom.submit.onclick = function action() {
+                var operator, operations, test, res;
+
+                operations = {
+                    add: add,
+                    sub: sub,
+                    mult: mult,
+                    div: div
+                };
+
+                test = checkValues(dom.op1.value, dom.op2.value);
+
+                if (test) {
+                    operator = checkOperator();
+                    // ci-dessous => cette syntace = oindexation directe
+                    res = operations[operator](test.op1, test.op2);
+                }
+
+                if (!test || !res) {
+                    display.innerHTML = "erreur de calcul :/";
+                } else {
+                    display.innerHTML = res;
+                }
+            };
+        };
+
+        window.onload = function start() {
+            calculetteSimple();
+        };
+    </script>
+</head>
+<body>
+    <div id="calculatrice" class="calculatrice">
+        <div class="calc">
+            <input type="number" id="oper1" class="number" value="20">
+            <select id="operators" class="operators">
+                <option value="add" class="operator">add</option>
+                <option value="sub" class="operator">sub</option>
+                <option value="div" class="operator">div</option>
+                <option value="mult" class="operator">mult</option>
+            </select>
+            <input type="number" id="oper2" class="number" value="10">
+            <input type="submit" id="submit" class="calculate">
+        </div>
+        <div id="display" class="display">nothing to compute yet...</div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,92 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: arial;
+}
+
+.icon {
+    cursor: pointer;
+}
+
+.icon:hover {
+    color: orange;
+}
+
+.is-hidden {
+    display: none;
+}
+
+.grid-header {
+    background: silver;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.grid-header .icon {
+    min-height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: inherit;
+}
+
+.nav-main {
+    flex: 1;
+    min-height: 60px;
+}
+
+.nav-mobile .list {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    transform: translateX(-100%);
+    transition: transform 1s linear;
+}
+
+.nav-mobile.is-active .list {
+    transform: translateX(0);
+}
+
+.nav-mobile .item {
+    height: 40px;
+    width: 100%;
+}
+
+[class^=nav-] .list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    min-height: inherit;
+    align-items: center;
+}
+
+[class^=nav-] .item {
+    cursor: pointer;
+    flex: 1;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    min-height: inherit;
+}
+
+[class^=nav-] .item:hover {
+    color: white;
+    background: cadetblue;
+}
+
+@media (min-width: 601px) {
+    .grid-header .icon {
+        display: none !important;
+    }
+}
+
+@media (max-width: 601px) {
+    .nav-main {
+        display: none;
+    }
+}

@@ -1,0 +1,60 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Avenir;
+    font-size: 16px;
+    padding: 10px;
+}
+
+table, th, td {
+    border: 1px solid;
+    border-collapse: collapse;
+}
+
+#tabler th, #tabler td {
+    padding: 5px;
+}
+
+#tabler {
+    margin: 20px 0;
+    text-align: center;
+}
+
+#tabler .id, #tabler .mail {
+    width: 120px;
+}
+
+.is-hidden {
+    display: none;
+}
+
+.btn {
+    width: 120px;
+    height: 32px;
+    padding: 10px;
+    border: 1px solid transparent;
+    border-radius: .4rem;
+    background: rgb(138, 205, 106);
+    color: white;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: darkgray;
+}
+
+input[type=text] {
+    height: 32px;
+    width: 220px;
+    border: 1px solid;
+    padding: 10px;
+    margin-right: 20px;
+}
+
+.f-row {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+}

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS et JS sont les meilleurs potes</title>
+    <script src="utility.js"></script>
+    <script>
+        // log ("this global");
+        // log(this); // vaut window (objet global);
+
+        // CSSEtJS1 est un event handler ou gestionnaire d'évenement
+        var CSSEtJS1 = function CSSEtJS1 (e) {
+            this.classList.toggle("is-active");
+            // if (this.classList.contains("is-active")) {
+            //     log("l'élément clické contient la classe active !")
+            // }
+            log ("this dans event handler");
+            log(this);
+            // this dans ce contexte (event handler) =>
+            // représente la source de l'évenement (block)
+        };
+
+
+        window.onload = function start() {
+            "use strict";
+            log("loaded => we are ready to rock !!!");
+            // log ("window.onload : this en mode strict");
+            // log(this); // vaut window ici
+            // this dans ce contexte (event handler) =>
+            // représente la source de l'évenement (window)
+            //action1();
+
+            action2();
+            action3();
+        };
+
+        var action1 = function action1() {
+            "use strict";
+            log ("action1 : this en mode strict");
+            log(this); // vaut undefined ici (cause mode strict)
+            var block = document.querySelector(".block");
+            block.onclick = CSSEtJS1;
+            // je pose un event listener (écouteur d'évenement)
+            // qui déclenche une event handler !!!
+        };
+
+        var action2 = function action2() {
+            "use strict";
+            var blocks = document.querySelectorAll(".block");
+            // je pose un event listener sur CHAQUE block
+            // for (i = 0; i < blocks.length; i += 1) {
+            //     blocks[i].onclick = CSSEtJS1;
+            // }
+            // ou comme ça avec notre fonction utilitaire
+            parseObserveHandle(blocks, "click", CSSEtJS1);
+        };
+
+        var action3 = function action3() {
+            "use strict";
+            var circles = document.querySelectorAll(".circle");
+            parseObserveHandle(circles, "mouseenter", CSSEtJS1);
+            parseObserveHandle(circles, "mouseleave", CSSEtJS1);
+        };
+
+
+    </script>
+    <style>
+        .blocks {
+            display: flex;
+            flex-wrap: wrap;
+            width: 144px;
+        }
+
+        .block {
+            cursor: pointer;
+            background: cadetblue;
+            border: 4px solid black;
+            box-sizing: border-box;
+            height: 64px;
+            width: 64px;
+            transition: background 1s linear;
+        }
+
+        .block.is-active {
+            background: orange;
+        }
+
+        .circle {
+            cursor: pointer;
+            background: cadetblue;
+            border: 4px solid black;
+            box-sizing: border-box;
+            height: 64px;
+            width: 64px;
+            transition: background 1s linear;
+        }
+
+        .circle {
+            background: black;
+            height: 128px;
+            width: 128px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .circle.is-active {
+            animation: 1s infinite rotate;
+        }
+
+        .circle.is-active .block {
+            animation: 2s infinite alternate resize;
+        }
+
+        .circle .block {
+            background: white;
+            transform: rotate(45deg);
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes resize {
+            from {
+                height: 64px;
+                width: 64px;
+            }
+            to {
+                height: 32px;
+                width: 32px;
+            }
+    </style>
+</head>
+<body>
+    <div class="blocks">
+        <div class="block"></div>
+        <div class="block"></div>
+        <div class="block"></div>
+        <div class="block"></div>
+        <div class="block"></div>
+        <div class="block"></div>
+        <div class="block"></div>
+        <div class="block"></div>
+        <div class="block"></div>
+        <div class="block"></div>
+    </div>
+    <hr>
+    <div class="circle">
+        <div class="block"></div>
+    </div>
+</body>
+</html>

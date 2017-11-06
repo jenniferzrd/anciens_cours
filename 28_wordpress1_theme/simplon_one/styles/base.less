@@ -1,0 +1,56 @@
+@dark: #37393c;
+@light: #f9f9fb;
+@blue: #69b3c5;
+@red: firebrick;
+@orange: orange;
+
+@import url("modules/logo.less");
+@import url("modules/navigation.less");
+@import url("modules/template.less");
+
+
+@-ms-viewport,
+@-o-viewport,
+@-webkit-viewport,
+@-moz-viewport,
+@viewport {
+    // width: device-width;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: @blue;
+    font-size: 16px;
+    padding: 20px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    &:hover {
+        color: @orange;
+    }
+}
+
+
+.f-row {
+    .flex();
+}
+
+.f-col {
+    .flex(column);
+}
+
+.flex(@direction: row) {
+    -webkit-display: flex;
+    -moz-display: flex;
+    -o-display: flex;
+    -ms-display: flex;
+    display: flex;
+    flex-direction: @direction;
+}

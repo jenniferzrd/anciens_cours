@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Vue JS - Section 4.1 - Project 1 - Monster Chalenge</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="monster-challenge.css">
+    <link rel="stylesheet" href="../00-styles/styles.css">
+    <script>
+        window.onload = function start() {
+            new Vue({
+                el: "#app",
+                data: {
+                    online: false,
+                    human: {
+                        name: "Human",
+                        life: 100
+                    },
+                    logs: [],
+                    monster: {
+                        name: "Monster",
+                        life: 100
+                    }
+                },
+                methods: {
+                    addLog: function(source, target, damage) {
+                        this.logs.unshift({
+                            text: source + " HITS " + target + " with " + damage,
+                            isHuman: source !== "Monster"
+                        });
+                    },
+                    attack: function() {
+                        let damage = this.getDamage(3, 10);
+                        this.monster.life -= damage;
+                        this.addLog(this.human.name, "Monster", damage);
+                        if (this.checkWin()) return;
+                        this.monsterAttacks();
+                        this.checkWin();
+                    },
+                    attackSpecial: function() {
+                        let damage = this.getDamage(10, 20);
+                        this.monster.life -= damage;
+                        this.addLog(this.human.name, "Monster", damage);
+                        if (this.checkWin()) return;
+                        this.monsterAttacks();
+                        this.checkWin();
+                    },
+                    checkWin: function() {
+                        if (this.monster.life <= 0) {
+
+                            if (confirm("you win ! wanna play again ?")) {
+                                this.startGame();
+                            } else {
+                                this.monster.life = 0;
+                                this.online = false;
+                            }
+                            return true;
+
+                        } else if (this.human.life <= 0) {
+
+                            if (confirm("you loose ! wanna play again ?")) {
+                                this.startGame();
+                            } else {
+                                this.human.life = 0;
+                                this.online = false;
+                            }
+                            return true;
+                        }
+                        return false;
+                    },
+                    getDamage: function(min, max) {
+                        return Math.max(Math.floor(Math.random() * max) + 1, min);
+                    },
+                    heal: function() {
+                        this.human.life = (this.human.life + 10 <= 100) ? this.human.life + 10 : 100;
+                        this.monsterAttacks();
+                    },
+                    monsterAttacks: function() {
+                        let damage = this.getDamage(9, 15);
+                        this.human.life -= damage;
+                        this.addLog("Monster", this.human.name, damage);
+                    },
+                    reset: function() {
+                        this.human.life = 100;
+                        this.monster.life = 100;
+                        this.logs = [];
+                    },
+                    startGame: function() {
+                        this.reset();
+                        this.online = true;
+                    },
+                }
+            });
+        };
+    </script>
+</head>
+
+<body>
+    <div id="app" class="app monster">
+
+        <div class="players">
+            <div class="player human">
+                <h1 class="title">{{human.name}}</h1>
+                <div class="life">
+                    <div class="level" :style="{width: human.life + '%'}">
+                        <span v-if="human.life > 0">
+                            {{human.life}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="player monster">
+                <h1 class="title">Monster</h1>
+                <div class="life">
+                    <div class="level" :style="{width: monster.life + '%'}">
+                        <span v-if="monster.life > 0">
+                            {{monster.life}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tools">
+
+            <button @click="startGame" v-if="!online" class="btn">start game</button>
+
+            <div v-else class="actions">
+                <button @click="attack" class="btn attack">
+                    attack
+                </button>
+                <button @click="attackSpecial" class="btn special">
+                    special attack
+                </button>
+                <button @click="heal" class="btn heal">
+                    heal
+                </button>
+                <button @click="startGame" class="btn">
+                    give up
+                </button>
+            </div>
+
+            <div>
+                <p>player name</p>
+                <input type="text" class="input" v-model="human.name">
+            </div>
+
+        </div>
+
+        <div class="logs">
+            <span v-if="!logs.length">No logs yet...</span>
+            <div class="log" v-for="(log, i) in logs"
+            :class="{player: log.isHuman}" :key="i">
+                {{log.text}}
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

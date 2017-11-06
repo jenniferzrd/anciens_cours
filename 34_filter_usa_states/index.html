@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" maxlength="1" id="filter_input">
+    <ol id="states">
+        <li>Arizona</li>
+        <li>Alaska</li>
+        <li>Arkansas</li>
+        <li>Alabama</li>
+        <li>Californie</li>
+        <li>Caroline N</li>
+        <li>Caroline S</li>
+        <li>Connecticut</li>
+        <li>Colorado</li>
+        <li>Dakota N</li>
+        <li>Dakota S</li>
+        <li>Delaware</li>
+        <li>Floride</li>
+        <li>Georgie</li>
+        <li>Hawai</li>
+        <li>Idaho</li>
+        <li>Illinois</li>
+        <li>Indiana</li>
+        <li>Iowa</li>
+        <li>Kansas</li>
+        <li>Kentucky</li>
+        <li>Louisiane</li>
+        <li>Maine</li>
+        <li>Michigan</li>
+        <li>Maryland</li>
+        <li>Mississippi</li>
+        <li>Minesota</li>
+        <li>Montana</li>
+        <li>Missouri</li>
+        <li>Massachussets</li>
+        <li>Nebraska</li>
+        <li>New York</li>
+        <li>New Jersey</li>
+        <li>Nevada</li>
+        <li>New Mexico</li>
+        <li>New Hampshire</li>
+        <li>Ohio</li>
+        <li>Oklahoma</li>
+        <li>Oregon</li>
+        <li>Pennsylvanie</li>
+        <li>Rhode Island</li>
+        <li>Tennessee</li>
+        <li>Texas</li>
+        <li>Utah</li>
+        <li>Virginie</li>
+        <li>Virginie occidentale</li>
+        <li>Vermont</li>
+        <li>Washington</li>
+        <li>Wyoming</li>
+        <li>Wisconsin</li>
+    </ol>
+    <script>
+        var statesElements, statesElementsArr, states;
+        statesElements = document.querySelectorAll("#states li");
+        statesElementsArr = Array.prototype.slice.call(statesElements);
+        states = [];
+
+        statesElementsArr.forEach(function(state) {
+            states.push(state.textContent)
+        });
+
+        console.log(states);
+
+        // créer une fonction prennant une lettre en paramètre
+        // retourner un tableau contenant les états donc la première lettre est égale au paramètre.
+        //
+
+        function filterStates (lettre) {
+            // console.log(lettre);
+            return states.filter(function(state){
+                // console.log(state);
+                return state.toLowerCase().charAt(0) === lettre.toLowerCase();
+            });
+            // return filtres;
+        }
+
+        var res1 = filterStates("a");
+        var res2 = filterStates("W");
+
+        console.log(res1);
+        console.log(res2);
+
+        filter_input.onkeyup = function() {
+            var res = filterStates(this.value);
+            console.log(res);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>test vuejs 1</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Avenir;
+            max-width: 95%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .f-row {
+            display: flex;
+        }
+
+        .action:hover {
+            color: darkorange;
+            cursor: pointer;
+        }
+
+        .text {
+            padding: 10px;
+            background: #d0d1d8;
+            border-radius: .3rem;
+            max-width: 320px;
+        }
+
+        .danger {
+            color: white;
+            background: firebrick;
+        }
+
+        .important {
+            color: darkorange;
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+
+        .jeune,
+        .vieux {
+            max-width: 320px;
+            padding: 10px;
+            border-radius: .3rem;
+            margin-bottom: 10px;
+        }
+
+        .jeune {
+            background: dodgerblue;
+            color: white;
+        }
+
+        .vieux {
+            background: darkseagreen;
+            color: white;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="node_modules/font-awesome/css/font-awesome.min.css">
+    </script>
+    <script src="node_modules/vue/dist/vue.min.js"></script>
+    <script>
+        window.onload = function start() {
+            // console.log(Vue);
+            new Vue({
+                // code VueJS ici ; )
+                el: "#app",
+                data: {
+                    interval: null,
+                    valeurBase: 0,
+                    valeurMax: 1000,
+                    title: "VueJS rocks !!!",
+                    count: 0,
+                    monObj: {
+                        maProp: "je suis une String, liée à monObj"
+                    },
+                    users: [{
+                            name: "Jim",
+                            age: 23
+                        },
+                        {
+                            name: "Joe",
+                            age: 40
+                        },
+                        {
+                            name: "Jack",
+                            age: 55
+                        },
+                        {
+                            name: "Jill",
+                            age: 30
+                        },
+                        {
+                            name: "Joyce",
+                            age: 19
+                        }
+                    ]
+                },
+                methods: {
+                    getUserClass: function(usr) {
+                        return usr.age > 25 ? "vieux" : "jeune";
+                    },
+                    onUpdateTitle: function(e) {
+                        console.log("l'input contient: " + e.target.value);
+                        // this.title = e.target.value;
+                    },
+                    updateCount: function(mode) {
+                        this.count = Number(this.count);
+                        this.count = mode === "incr" ? this.count += 1 : this.count -= 1;
+
+                        // @ag: version aternative =>
+
+                        if (mode === "incr") {
+                            this.count += 1
+                        } else {
+                            this.count -= 1;
+                        }
+                    }
+                },
+                watch: {
+                    valeurBase: function() {
+                        console.log("mise à jour de this.valeurBase =>");
+                        console.log(this.valeurBase);
+                        if (this.valeurBase >= this.valeurMax) {
+                            console.log("la valeur max a été atteinte !");
+                            window.clearInterval(this.interval);
+                        }
+                    }
+                },
+                // 1er cycle de vie (life-cycle) de l'application
+                created: function() {
+                    console.log("l'app vue a été créé");
+
+                    this.interval = window.setInterval(function() {
+                        this.valeurBase += 100;
+
+                    }.bind(this), 100);
+                }
+            });
+        };
+    </script>
+</head>
+
+<body>
+    <section id="app">
+        <h1>{{ title }}</h1>
+        <hr>
+        <p>
+            le symbole <code>{{}}</code> représente une "interpolation de chaîne". <br>Vous pouvez y placer n'importe quelle expression JS ... <br> tant qu'elle se resoud à une String.
+        </p>
+        <p>
+            par exemple: <span class="important">{{ 1 + 1 }}</span> (=> est le résulat d'un calcul)
+        </p>
+
+        <h2>Les events</h2>
+
+        <p class="text">
+            Ci-dessous, on peut lier un event() à une fonction contenue dans notre instance de Vue() =>
+        </p>
+
+        <input type="text" v-on:input="onUpdateTitle($event)" placeholder="changer le titre">
+
+        <p class="text">
+            La technique ci dessus fonctionne mais, on peut faire encore plus simple :<br> En mettant en oeuvre la mécanique de "2 way data-binding" !
+        </p>
+
+        <input type="text" v-model="title" placeholder="changer le titre via v-model">
+
+        <!-- <p class="text" v-bind:class="{danger: count < 0}"> -->
+        <!--  ci-dessous: syntaxe alternative de v-bind: -->
+        <p class="text" :class="{danger: count < 0}">
+            Il est facile de mettre à jour une valeur : {{ count }}
+        </p>
+
+        <input type="range" min="0" max="100" step="10" v-model="count">
+
+        <hr>
+
+        <h2>Les conditions</h2>
+        <p>
+            <span v-if="count > 0">La valeur de count est positive</span>
+            <span v-else-if="count < 0">La valeur de count est négative</span>
+            <span v-else="count === 0">La valeur de count est nulle</span>
+            <!-- note: l'attribute v-else + v-else-if  est également disponible -->
+        </p>
+        <p>
+            <span v-show="count === 0">
+                avec <code>v-show</code>, l'élément est masqué en CSS et non retiré du DOM
+            </span>
+        </p>
+
+        <div class="f-row">
+            <i class="action fa fa-caret-up fa-3x" aria-hidden="true" v-on:click="updateCount('incr')"></i>
+            <!-- ci-dessous syntaxe alternative d'event listener avec @
+        au lieu de v-on: -->
+            <i class="action fa fa-caret-down fa-3x" aria-hidden="true" @click="updateCount('decr')"></i>
+        </div>
+
+        <h2>Différence entre v-if et v-show</h2>
+        <p>
+            v-if="condition" : l'élément ne sera implanté dans le document HTML si et seulement si la condition est truthy.<br>
+            Si la condition est falsy, l'élément est retiré du document.
+            <hr>
+            v-show="condition" : l'élément est toujours présent dans le document, mais il est masqué via CSS tant que la condition n'est pas truthy.
+        </p>
+
+        <hr>
+
+        <h2>Accéder aux propriétés d'un objet</h2>
+
+        <p>
+            Les objet litéraux déclarés dans les data d'une instance de Vue() fonctionne comme en JS Vanilla. L'accesseur (le point ".") permet d'en lire les propriétés. Exemple ci-dessous =>
+        </p>
+        <p>
+            {{ monObj.maProp }}
+        </p>
+
+        <hr>
+
+        <h2>Les boucles</h2>
+        <h3>version simple ...</h3>
+
+        <ul class="list">
+            <li class="item" v-for="nbre in 10">{{ nbre }}</li>
+        </ul>
+
+        <hr>
+        <h3>parcours d'objets + classe CSS conditionnelle</h3>
+        <!--  VERSION 1 -->
+        <!-- <ul>
+            <li v-for="(user, i) in users">
+                user n° {{ i + 1 }}<br>
+                Nom: {{ user.name }} || âge: {{ user.age }}
+            </li>
+        </ul> -->
+        <!--  VERSION 2 -->
+        <!-- <ul class="list">
+            <li class="item" v-for="(user, index) in users">
+                <h2>user n°{{ index }}</h2>
+                <p v-for="(prop, key) in user">{{key}} :  {{prop}}</p>
+            </li>
+        </ul> -->
+        <!--  VERSION 3 -->
+        <ul>
+            <!-- <li v-for="(user, i) in users"
+            :class="{vieux: user.age > 25, jeune: user.age < 25 }"> -->
+            <li v-for="(user, i) in users" class="user" :class="getUserClass(user)">
+                <h2>user n° {{ i + 1 }}</h2>
+                <!--  on parcourt chaque user du users -->
+                <p v-for="(val, prop) in user">
+                    <!--  on parcourt chaque propriété/valeur de user-->
+                    <span>{{ prop }}</span> : {{ val }}
+                </p>
+            </li>
+        </ul>
+
+        <hr>
+        <h2>TP 1</h2>
+        <p>
+            TP : Créer un tableau d'utilisateurs (des objets)<br> Ajoutez à chacun deux propriétés : name et age.<br>
+        </p>
+        <p>
+            <b>Etape 1 :</b> <br>Utilisez l'attribute v-for pour parcourir le tableau et afficher les résultats.
+        </p>
+        <p>
+            <b>Etape 2 :</b> <br>Si l'âge est supérieur à 25, afficher une classe css de votre choix, sinon une autre classe CSS !<br>
+        </p>
+
+        <hr>
+
+        <hr>
+        <h2>Watch</h2>
+        <p>
+            watch permet de surveiller une valeur de this.data. La fonction associée est excutée à chaque fois que la valeur est mise à jour.
+        </p>
+
+        <hr>
+        <h2>Style inline</h2>
+        <p>
+            watch permet de surveiller une valeur de this.data. La fonction associée est excutée à chaque fois que la valeur est mise à jour.
+        </p>
+        <ul>
+            <li v-for="n in 10">
+                <span :style="{
+                        color: n % 2 === 0 ? 'red' : 'blue',
+                        background: n % 2 === 0 ? 'blue' : 'red'
+                    }">
+                    tour de boucle n° {{ n }}
+                </span>
+            </li>
+        </ul>
+    </section>
+</body>
+
+</html>

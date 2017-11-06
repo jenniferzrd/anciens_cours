@@ -1,0 +1,104 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: arial;
+}
+
+.app.monster {
+    max-width: 85%;
+    margin: 0 auto;
+}
+
+.players {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    border-bottom: none !important;
+}
+
+.players .player {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    flex: 1;
+    min-height: 120px;
+}
+
+.players .player .title {
+    margin: 0;
+}
+
+.players .player .life {
+    border: 1px solid;
+    width: 90%;
+}
+
+.life .level {
+    height: 101%;
+    background: forestgreen;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    padding: 3px 0;
+    transition: width 0.5s linear;
+    height: 26px;
+}
+
+.tools {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid silver !important;
+    border-radius: .3rem;
+}
+
+.app.monster .btn {
+    min-width: 90px;
+}
+
+.app.monster .btn:hover {
+    border-width: 2px;
+}
+
+.btn.attack, .btn.attack:hover {
+    background: firebrick;
+    color: white;
+}
+
+.btn.special, .btn.special:hover  {
+    background: orange;
+    color: white;
+}
+
+.btn.heal, .btn.heal:hover  {
+    background: green;
+    color: white;
+}
+
+.logs {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border: 1px solid silver !important;
+    border-radius: .3rem;
+}
+
+.logs .log {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 32px;
+    background: #c12525;
+    color: white;
+    margin-bottom: 5px;
+}
+
+.logs .log.player {
+    background: #4242b1;
+}

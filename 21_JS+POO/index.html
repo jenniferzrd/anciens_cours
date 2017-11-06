@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>JS POO - 1</title>
+    <script src="Cake.js"></script>
+    <script src="../utility/utility.js"></script>
+    <script src="app.js"></script>
+    <script src="https://use.fontawesome.com/2d672d9c4e.js"></script>
+    <link rel="stylesheet" href="styles/styles.css">
+</head>
+
+<body>
+    <h1 class="title">Programmation Orientée Objet (POO)</h1>
+    <p class="text">
+        En JS, les constructeurs sont de simples fonctions, exécutées avec le mot-clé "new".<br>On fabrique un moule à objects (le constructeur).<br>Dans le scope de ce moule, on indique les variables propres à chaque object construit. <br>On y place
+        également la logique de fonctionnement initiale (comment notre objet va se comporter).
+    </p>
+    <p class="text">
+        Avec le prototype, on associe des fonctions propres à chaque objet construit.<br>On appelle ces fonctions des "méthodes d'instance".<br>Le but du jeu est de modulariser notre code, de fabriquer des outils autonomes.<br>On les combine pour construire
+        nos applications.
+    </p>
+    <p class="text">
+        A partir du code HTML ci dessous, réalisez une app pour fabriquer des gateaux !<br> Miam : voir le code contenu dans Cake.js et instanciez des gateaux dans app.js avec le constructeur Cake.<br> Trouvez un système pour associer une vue aux gateaux
+        créés.
+    </p>
+    <div class="tools">
+        <h2 class="title">The Cake Factory</h2>
+        <input type="number" min="1" id="cake_count" placeholder="combien de cakes ?" class="input" value="3">
+        <input type="number" min="1" id="cake_price" placeholder="prix d'un cake ?" class="input" value="5">
+        <input type="text" id="cake_flavor" placeholder="quel parfum ?" class="input" value="chocolate">
+        <button id="create_a_cake" class="input submit">get sugar !!!</button>
+    </div>
+    <div class="cakes" id="cakes"></div>
+</body>
+
+</html>

@@ -1,0 +1,184 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-size: 16px;
+    font-family: arial;
+    padding: 20px;
+}
+
+ul {
+    padding-left: 20px;
+    list-style: none;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.is-hidden {
+    display: none;
+}
+
+.grid-header,
+.grid-footer {
+    background: #393939;
+    padding: 10px 20px;
+    color: white;
+}
+
+.grid-footer {
+    margin-top: 20px;
+    text-align: right;
+}
+
+.row, .col {
+    display: flex;
+}
+
+.col {
+    flex-direction: column;
+}
+
+.icon:hover {
+    color: orange;
+}
+
+.link {
+    cursor: pointer;
+    color: firebrick;
+}
+
+.title {
+    font-size: 1.3rem;
+    margin: 20px 0;
+}
+
+.input {
+    display: block;
+    margin-bottom: 10px;
+    width: 280px;
+    height: 32px;
+    padding: 3px 0 3px 20px;
+    border-radius: .3rem;
+    border: 1px solid silver;
+}
+
+.tools {
+    max-width: 50%;
+    border-bottom: 2px solid silver;
+    padding-bottom: 10px;
+}
+
+.tools .icon {
+    cursor: pointer;
+    color:grey;
+    border: 1px solid grey;
+    padding: 5px;
+    border-radius: .3rem;
+}
+
+.lister {
+    padding-left: 0;
+    max-width: 50%;
+    list-style: none;
+}
+
+.item {
+    margin-bottom: 5px;
+}
+
+.item .container {
+    height: 30px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex: 0 0 10%;
+}
+
+.item.is-active {
+    border: 1px solid orange;
+}
+
+.item:nth-child(even) {
+    background: #908578;
+}
+
+.item:nth-child(odd) {
+    background: cadetblue;
+}
+
+.item .title {
+    font-size: .9rem;
+    font-weight: 400;
+    color: white;
+}
+
+.item .icon {
+    cursor: pointer;
+}
+
+.item .icon:hover {
+    color: orange;
+}
+
+.nav-main ul {
+    padding: 0;
+}
+
+.nav-main li {
+    margin-right: 20px;
+}
+
+.nav-main li a:hover {
+    color: lime;
+}
+
+.tabler, .tabler td, .tabler th {
+    border: 1px solid;
+    border-collapse: collapse;
+}
+
+.tabler td, .tabler th {
+    text-align: center;
+    padding: 15px;
+}
+
+.tabler td.delete {
+    cursor: pointer;
+}
+
+.tabler td.delete > input {
+    pointer-events: none;
+}
+
+.tabler tbody tr:hover {
+    background: silver;
+    color: white;
+}
+
+.tabler tr:hover .link {
+    cursor: pointer;
+    color: cadetblue;
+}
+
+.tabler  button.link {
+    border: none;
+    background: none;
+    font-size: 1.2rem;
+}
+
+.no-pages {
+    padding: 20px 0;
+    color: orange;
+    text-shadow: 1px 1px 0.1Px black;
+}

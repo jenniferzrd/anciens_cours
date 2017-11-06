@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulaires -> PHP</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="../utility/utility.js"></script>
+    <script src="https://use.fontawesome.com/2d672d9c4e.js"></script>
+    <script>
+        var forms = (function forms() {
+            "use strict";
+
+            window.onload = function start() {
+                roiDeLAuto();
+                inscription();
+                shapeShifting();
+            };
+
+            function shapeShifting() {
+                var range, circle;
+                range = byId("circle_size");
+                circle = byId("circle");
+
+                range.oninput = function changeSize() {
+                    circle.textContent = this.value + "px";
+                    circle.style.height = this.value + "px";
+                    circle.style.width = this.value + "px";
+                };
+            }
+
+            function inscription() {
+                var btn, file;
+                btn = byId("upload");
+                file = byId("file");
+
+                btn.onclick = function action() {
+                    file.click();
+                };
+            }
+
+            function roiDeLAuto() {
+                var inputAutoPrice, maxPrice;
+                maxPrice = byId("my_max_price");
+                inputAutoPrice = byId("price_range");
+
+                inputAutoPrice.oninput = function afficher() {
+                    maxPrice.textContent = this.value;
+                };
+            }
+        }());
+    </script>
+</head>
+<body>
+    <h1 class="title">Roi de l'auto</h1>
+
+    <form method="post" action="traitement.php">
+        <label class="title" for="select_brand">Marque</label>
+        <select id="select_brand" name="brand">
+            <option value="bentley">Bentley</option>
+            <option value="lotus">Lotus</option>
+            <option value="koenig">Koenigg</option>
+            <option value="ferrari">Ferrari</option>
+            <option value="bugatti">Bugatti</option>
+            <option value="rolls-royce">Rolls Royce</option>
+            <option value="porsche">Porsche</option>
+            <option value="mercedes">Mercedes</option>
+        </select>
+        <label class="title" for="select_type">Gamme</label>
+        <select id="select_type" name="type">
+            <option value="berline">Berline</option>
+            <option value="coupe">Coupé</option>
+            <option value="sportive">Sportive</option>
+            <option value="super-sportive">Super Sportive</option>
+            <option value="suv">SUV</option>
+            <option value="compacte">Compacte</option>
+            <option value="limousine">Limousine</option>
+        </select>
+        <label class="title">Etat</label>
+        <label class="hover" for="state_new_old">Neuf &amp; occasion</label>
+        <input id="state_new_old" type="radio" name="state" value="new_old" checked>
+        <label class="hover" for="state_new">Neuf</label>
+        <input id="state_new" type="radio" name="state" value="new">
+        <label class="hover" for="state_old">Occasion</label>
+        <input id="state_old" type="radio" name="state" value="old">
+
+        <label class="title">
+            <span>Prix max:</span>
+            <span id="my_max_price">1000</span>
+            <span>&nbsp;€</span>
+        </label>
+        <input value="5000" min="5000" max="1000000" type="range" id="price_range" name="price_range">
+
+        <button class="submit" name="submit">OK !</button>
+    </form>
+
+    <h2 class="title">Formulaire d'inscription</h2>
+
+    <form action="traitement.php" method="post">
+        <input type="text" required name="nom" class="input title" placeholder="votre nom de famille *">
+
+        <input type="text" required name="prenom" class="input title" placeholder="votre prénom *">
+
+        <input type="email" required name="email" class="input title" placeholder="votre email *">
+
+        <input type="tel" required name="phone" class="input title" pattern="^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,5})|(\(?\d{2,6}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext)\d{1,5}){0,1}$" placeholder="votre numéro de téléphone *">
+
+        <input type="text" name="pseudo" class="input title" placeholder="votre pseudo">
+        <input type="password" name="motdepasse" class="input title" placeholder="votre mot de passe">
+        <label for="anniversaire">Anniversaire</label>
+
+        <input id="anniversaire" type="date" name="anniversaire"
+        class="input title">
+
+        <label>Avatar</label>
+
+        <i id="upload" class="upload fa-2x fa fa-cloud-upload" aria-hidden="true"></i>
+
+        <input id="file" type="file" class="is-hidden">
+
+        <input type="submit" name="send" value="s'inscrire" class="submit">
+
+    </form>
+
+    <h2 class="title">Rechercher de la musique</h2>
+
+    <form action="traitement.php" method="post">
+        <label class="title" for="music_style">Choisis ton style !</label>
+        <input id="music_style" list="music_genre" name="genre" class="input">
+        <datalist id="music_genre">
+            <option value="trip hop">
+            <option value="punk">
+            <option value="rock">
+            <option value="rap">
+            <option value="rumba">
+            <option value="gipsy">
+            <option value="trap">
+            <option value="afro trap">
+            <option value="electro">
+            <option value="techno">
+            <option value="swing">
+            <option value="blues">
+            <option value="break beat">
+            <option value="lo fi">
+            <option value="classic">
+            <option value="disco">
+            <option value="jazz">
+            <option value="jazz manouche">
+            <option value="heavy metal">
+            <option value="speed metal">
+            <option value="dark metal">
+            <option value="black metal">
+            <option value="grunge">
+            <option value="drum and bass">
+            <option value="core">
+            <option value="grimme">
+            <option value="hardcore (metal)">
+            <option value="hardcore (techno)">
+            <option value="dubstep">
+            <option value="gospel">
+            <option value="zouk">
+            <option value="mapoka">
+            <option value="coupé décalé">
+            <option value="samba">
+        </datalist>
+        <input type="submit" value="find" class="submit">
+    </form>
+
+    <h2 class="title">Shape changing</h2>
+
+    <form action="traitement.php" method="post" class="shape-changer">
+        <label for="circle_size" class="title">Changer la taille du cercle</label>
+        <input id="circle_size" type="range" value="125" min="60" max="250">
+        <div id="circle" class="circle">120px</div>
+    </form>
+
+</body>
+</html>

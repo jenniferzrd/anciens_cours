@@ -1,0 +1,94 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 16px;
+  font-family: arial;
+  padding: 20px;
+}
+
+ul {
+  padding-left: 20px;
+}
+
+a {
+  text-decoration: none;
+}
+
+.text {
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: 1.3rem;
+  margin: 20px 0;
+}
+
+.title:first-of-type {
+  margin-top: 0;
+}
+
+.cartes {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.carte {
+  position: relative;
+}
+
+.carte::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  content: "";
+  height: 24px;
+  width: 24px;
+  border: 1px solid;
+}
+
+.humain.carte::after {
+  background: purple;
+}
+
+.personnage.carte::after {
+  background: orange;
+}
+
+.animal.carte::after {
+  background: firebrick;
+}
+
+.cartes {
+  margin-top: 20px;
+}
+
+.cartes .carte {
+  max-width: 220px;
+  width: 100%;
+  height: 220px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid;
+  margin: 0 20px 20px 0;
+}
+
+.cartes .nom {
+  margin-bottom: 10px;
+}
+
+.carte .icon {
+  height: 100px;
+  width: 100px;
+  align-self: center;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  margin-bottom: 10px;
+}
+
+.carte .item {
+  font-size: .9rem;
+}

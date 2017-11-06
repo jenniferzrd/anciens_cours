@@ -1,0 +1,138 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-size: 16px;
+    font-family: arial;
+    padding: 20px;
+}
+
+ul {
+    padding-left: 20px;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.row, .col {
+    display: flex;
+}
+
+.col {
+    flex-direction: column;
+}
+
+.icon:hover {
+    color: orange;
+}
+
+.link {
+    cursor: pointer;
+    color: firebrick;
+}
+
+.text {
+    font-size: .85rem;
+    margin: 20px 0;
+}
+
+.title {
+    font-size: 1.3rem;
+    margin: 20px 0;
+}
+
+.title:first-of-type {
+    margin-top: 0;
+}
+
+.input {
+    display: block;
+    margin-bottom: 10px;
+    width: 280px;
+    height: 32px;
+    padding: 3px 0 3px 20px;
+    border-radius: .3rem;
+    border: 1px solid silver;
+}
+
+.tabler.lieux {
+    padding: 5px 20px 20px;
+    border: 1px solid silver;
+    margin-bottom: 100px;
+    border: 1px solid silver;
+    border-collapse: collapse;
+}
+
+.tabler, .tabler tr, .tabler td {
+    border: 1px solid silver;
+    border-collapse: collapse;
+}
+.tabler .header {
+    background: #696969;
+    color: white;
+}
+
+.tabler .fa {
+    font-size: 1.3rem;
+}
+
+.tabler td {
+    padding: 10px;
+}
+
+.tabler .body tr:hover {
+    color: white;
+    background: silver;
+}
+
+.tabler .body tr:hover,
+.tabler .body tr:hover td{
+    border-color: white;
+}
+
+.tabler.lieux .item {
+    list-style: none;
+    border-bottom: 1px solid silver;
+    padding: 5px 0;
+}
+
+.tabler.lieux span {
+    padding-right: 10px;
+    border-right: 1px solid silver;
+}
+
+.tabler.lieux .fa:hover,
+.tabler.lieux a:hover {
+    color: orange;
+    cursor: pointer;
+}
+
+.tabler.lieux .geoloc .fa:hover {
+    cursor: help;
+}
+
+.tabler.lieux td {
+    text-align:center;
+    vertical-align:middle;
+}
+
+.map {
+    max-width: 100%;
+    width: 100%;
+    min-height: 320px;
+}
+
+.page-create .form,
+.page-edit .form {
+    margin-right: 40px;
+}
+
+.input.search {
+    top: 9px !important;
+    left: 9px !important;
+}

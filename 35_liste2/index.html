@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Listes 2</title>
+    <script src="exo1.js"></script>
+    <script src="exo2.js"></script>
+    <script src="exo3.js"></script>
+    <script>
+    window.onload = function start() {
+        exo1();
+        exo2();
+        exo3();
+    };
+    </script>
+    <style media="screen">
+        body {
+            font-family: Avenir;
+        }
+        .title {
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        .hidden {
+            display: none;
+        }
+        .f-row {
+            display: flex;
+        }
+        .f-row > * {
+            flex: 1;
+        }
+        .exo {
+            padding: 0 40px;
+            border-bottom: 1px solid;
+            margin-bottom: 40px;
+        }
+        .exo .title {
+            margin-bottom: 15px;
+            margin-right: 20px;
+            border-bottom: 1px solid silver;
+        }
+        #list1 li:hover, #list2 li:hover {
+            cursor: pointer;
+            color: dodgerblue;
+        }
+        .dropzone {
+            min-width: calc(540px / 2);
+            min-height: 200px;
+            margin-right: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="exo1" class="exo">
+        <h1 class="title">exo 1 (DOM insertions)</h1>
+        <header class="header">
+            <input id="input" type="text"
+            value="some test values" placeholder="votre todo ici...">
+            <button class="btn" id="insert">insert</button>
+            <button class="btn" id="reset">reset</button>
+        </header>
+        <ol id="racine"></ol>
+    </div>
+
+    <div id="exo2" class="exo">
+        <h1 class="title">exo 2 (drag and drop)</h1>
+        <div class="f-row" style="max-width:540px">
+            <div>
+                <h2 class="title">Liste 1</h2>
+                <ul id="list1" class="dropzone">
+                    <li draggable="true">item 1</li>
+                    <li draggable="true">item 2</li>
+                    <li draggable="true">item 3</li>
+                    <li draggable="true">item 4</li>
+                    <li draggable="true">item 5</li>
+                </ul>
+            </div>
+            <div>
+                <h2 class="title">Liste 2</h2>
+                <ul id="list2" class="dropzone">
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="exo3" class="exo">
+        <h1 class="title">exo 3 (list filter)</h1>
+        <header class="header">
+            <input id="input_filter" type="text" placeholder="votre recherche ici...">
+        </header>
+        <ul id="list_filter"></ul>
+    </div>
+</body>
+</html>

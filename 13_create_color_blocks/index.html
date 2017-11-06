@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>create color blocks</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="../utility/utility.js"></script>
+    <script src="app.js"></script>
+</head>
+<body>
+    <h1 class="title">Create color blocks :</h1>
+    <p>
+        Etape 1<br>
+        créer une mini application contenant :<br>
+        Un champs input number,<br>
+        un champs input color et<br>
+        un bouton de validation.<br>
+        Au click sur le bouton, on créé autant de div(s) qu'indiqué dans le champs number (1 par défaut).<br>
+        Le(s) block(s) créé(s) aura(ont) la couleur indiquée dans le champs color
+    </p>
+    <p>
+        Etape 2<br>
+        au click sur chaque block : passer de l'état active/inactif<br>
+        les blocks actifs peuvent être mis à jour (on change la couleur)...<br>
+        au click sur le bouton de validation.
+    </p>
+    <p>
+        Idée d'amélioration : créer un bouton reset qui vide le contenu de blocks. Si il y a des blocks actifs, ne supprimer que ceux là.
+    </p>
+    <h2 class="title">Indices :</h2>
+    <ul class="list indices">
+        <li>document.createElement</li>
+        <li>element.appendChild</li>
+        <li>element.value</li>
+        <li>element.style</li>
+        <li>element.onclick</li>
+    </ul>
+    <div id="tools" class="tools">
+        <input id="nb_blocks" type="number" class="input" value="1" min="1">
+        <input id="color_blocks" type="color" class="input">
+        <input id="create_blocks" type="submit" class="input submit">
+    </div>
+    <div id="blocks" class="blocks"></div>
+</body>
+</html>
